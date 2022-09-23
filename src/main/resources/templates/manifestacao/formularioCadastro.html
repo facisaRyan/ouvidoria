@@ -1,0 +1,54 @@
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Ouvidoria</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		
+	</head>
+	
+	<body>
+		
+		
+		
+		<div class="container">	
+			<h1>Cadastrar nova manifestação</h1>
+			<form th:object="${manifestacaoDto}"  method="post" action="/manifestacao/nova">
+				
+				<div>
+					<label class="form-label" for="tituloManifestacao">Titulo da manifestação:</label>
+					<input class="form-control" th:field="*{tituloManifestacao}" th:errorClass="is-invalid" placeholder="Titulo da manifestação"/>
+					<div class="alert alert-danger mt-3" th:errors="*{tituloManifestacao}">
+								Erros do campo produto
+					</div>
+				</div>
+				
+				<div>
+					<label class="form-label" for="categoriaId" >Categoria da manifestação:</label>
+					<select class="form-select" id="categoriaId" name="categoriaId">
+						<div th:each="categoria : ${categorias}">
+							<option th:field="*{categoriaId}"  th:value="${categoria.id}" th:text="${categoria.nome}"></option>
+						</div>
+					</select>
+				</div>
+				
+				<div>
+					<label class="form-label" for="descricaoManifestacao" >Descrição da manifestação:</label>
+					<textarea class="form-control" th:field="*{descricaoManifestacao}" th:errorClass="is-invalid" placeholder="Informe o que deseja manifestar"></textarea>		
+					<div class="alert alert-danger mt-3" th:errors="*{descricaoManifestacao}">
+								Erros do campo produto
+					</div>
+				</div>
+				
+				<button class="btn btn-primary mt-2" type="submit">Cadastrar manifestação</button>
+				
+			
+			</form>
+			
+			<a class="btn btn-secondary" href="http://www.localhost:8080/home/"> Voltar </a>
+		</div>
+		
+		
+	</body>
+	
+</html>

@@ -1,0 +1,33 @@
+Passo a passo para testes: 
+
+-> No eclipse e clicar na aba File no canto superior esquerdo e cliquem em import
+
+-> Abrir a aba de "Maven" e escolher a opção "Existing Maven Projects"
+
+-> Escolher o arquivo descompactado enviado
+
+(Esta parte pode demorar um pouco caso seja a primeira vez que o eclipse utiliza o  o maven)
+
+-> Para rodar a aplicação acesse a classe OuvidoriaAplicattion.java
+
+(Caminho para a classe -> src/main/java -> br.com.facisa.competencia.ouvidoria)
+
+-> Quando a aplicação terminar de ser iniciar no terminal abrir no navegor e pesquisar o endereço "http://www.localhost:8080/home/"
+--------------------------------------------------------------------------------------
+
+Adições:
+	
+	-> Integração com banco na nuvem utilizando heroky
+	-> Validação de campos
+	-> Deletar manifestação
+	-> Layout/style utilizando bootstrap
+	-> Busca de manifestações pelo titulo
+	-> Formatação campo de data
+	-> Busca automatica por categorias no banco de dados
+	-> Cache de buscas
+---------------------------------------------------------------------------------------
+
+Adições futuras:
+
+	-> Gerenciamento de usuarios com Spring-secutiry
+	-> Feature de editar manifestação
