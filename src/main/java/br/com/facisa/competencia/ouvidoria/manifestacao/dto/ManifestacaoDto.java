@@ -2,45 +2,40 @@ package br.com.facisa.competencia.ouvidoria.manifestacao.dto;
 
 
 
-import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 import br.com.facisa.competencia.ouvidoria.modelo.Manifestacao;
 
 public class ManifestacaoDto {
 	
-	@NotBlank
-	private String tituloManifestacao;
-	private int categoriaId;
-	@NotBlank
-	private String descricaoManifestacao;
+	private Integer id;
+	private String titulo;
+	private String descricao;
+	private LocalDateTime dataCriacao;
 	
 	
-	public String getTituloManifestacao() {
-		return tituloManifestacao;
+	public ManifestacaoDto(Manifestacao manifestacao) {
+		this.id = manifestacao.getId();
+		this.titulo = manifestacao.getTitulo();
+		this.descricao = manifestacao.getDescricao();
+		this.dataCriacao = manifestacao.getDataCriacao();
 	}
-	public void setTituloManifestacao(String tituloManifestacao) {
-		this.tituloManifestacao = tituloManifestacao;
-	}
-	public String getDescricaoManifestacao() {
-		return descricaoManifestacao;
-	}
-	public void setDescricaoManifestacao(String descricaoManifestacao) {
-		this.descricaoManifestacao = descricaoManifestacao;
+	public String getTitulo() {
+		return titulo;
 	}
 	
+	public String getDescricao() {
+		return descricao;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public LocalDateTime getDataCriacao() {
+		return dataCriacao;
+	}
+		
 	
-	public int getCategoriaId() {
-		return categoriaId;
-	}
-	public void setCategoriaId(int categoriaId) {
-		this.categoriaId = categoriaId;
-	}
-	public Manifestacao toManifestacao() {
-		Manifestacao manifestacao = new Manifestacao();
-		manifestacao.setTitulo(tituloManifestacao);
-		manifestacao.setDescricao(descricaoManifestacao);
-		return manifestacao;
-	}
 	
+		
 	
 }

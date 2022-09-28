@@ -5,9 +5,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.facisa.competencia.ouvidoria.controller.form.ManifestacaoForm;
+import br.com.facisa.competencia.ouvidoria.manifestacao.dto.ManifestacaoDto;
 import br.com.facisa.competencia.ouvidoria.modelo.Aluno;
+import br.com.facisa.competencia.ouvidoria.modelo.Categoria;
 import br.com.facisa.competencia.ouvidoria.modelo.Manifestacao;
 import br.com.facisa.competencia.ouvidoria.repository.AlunoRepository;
+import br.com.facisa.competencia.ouvidoria.repository.CategoriaRepository;
 import br.com.facisa.competencia.ouvidoria.repository.ManifestacaoRepository;
 
 @Service
@@ -17,25 +21,28 @@ public class  CrudManifestacaoService {
 	private ManifestacaoRepository manifestacaoRepository;
 	@Autowired
 	private AlunoRepository alunooRepository;
-	
+	@Autowired CategoriaRepository categoriaRepository;
 
 	
-	public Iterable<Manifestacao> listar() {
+	public Iterable<Manifestacao> getManifestacoes() {
 		return manifestacaoRepository.findAll();		
 	}
 
-	public void cadastrar(Manifestacao manifestacao) {
+	public ManifestacaoDto cadastrar(ManifestacaoForm manifestacaoForm) {
 		
-		Aluno aluno = new Aluno();
-		aluno.setIdade(17);
-		aluno.setMatricula("A2188D2");
-		aluno.setNome("josnei");
-		
-		alunooRepository.save(aluno);
-				
-		manifestacao.setAluno(aluno);
-				
+		Manifestacao manifestacao = converter(manifestacaoForm);		
 		manifestacaoRepository.save(manifestacao);
+		return new ManifestacaoDto(manifestacao);
+	}
+
+	private Manifestacao converter(ManifestacaoForm manifestacaoForm) {
+		
+		Optional<Aluno> optionalAluno = alunooRepository.findById(1);
+		Aluno aluno = optionalAluno.get();
+		
+		Optional<Categoria> optionalCategoria = categoriaRepository.findById(manifestacaoForm.getCategoriaId());
+		Categoria categoria = optionalCategoria.get();
+		return new Manifestacao(manifestacaoForm, categoria, aluno);
 	}
 
 	public void deletarManifestacao(int id) {
@@ -47,7 +54,7 @@ public class  CrudManifestacaoService {
 		return manifestacaoRepository.findByTituloIgnoreCaseStartingWith(titulo);
 	}
 	
-	public Optional<Manifestacao> getManifestacoesById(int id) {
+	public Optional<Manifestacao> getById(int id) {
 		return manifestacaoRepository.findById(id);
 	}
 	

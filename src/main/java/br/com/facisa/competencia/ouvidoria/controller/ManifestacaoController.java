@@ -36,23 +36,23 @@ public class ManifestacaoController {
 		return "manifestacao/formularioCadastro";
 	}
 	
-	@PostMapping("nova")
-	public String salvarProduto(@Valid ManifestacaoDto manifestacaoDto, BindingResult bindingResult, Model model) {
+//	@PostMapping("nova")
+	//public String salvarProduto(@Valid ManifestacaoDto manifestacaoDto, BindingResult bindingResult, Model model) {
 		
-		if(bindingResult.hasErrors()) {
-			Iterable<Categoria> categorias = crudCategoriaService.getCategorias();
-			model.addAttribute("categorias", categorias);
-			return "manifestacao/formularioCadastro";
-		}
+		//if(bindingResult.hasErrors()) {
+		//	Iterable<Categoria> categorias = crudCategoriaService.getCategorias();
+		//	model.addAttribute("categorias", categorias);
+		//	return "manifestacao/formularioCadastro";
+		//}
 				
-		Manifestacao manifestacao = manifestacaoDto.toManifestacao();
-		Categoria categoria = crudCategoriaService.getCategoriaById(manifestacaoDto.getCategoriaId());
+		//Manifestacao manifestacao = manifestacaoDto.toManifestacao();
+		//Categoria categoria = crudCategoriaService.getCategoriaById(manifestacaoDto.getCategoriaId());
 		
-		manifestacao.setTipo(categoria);
+		//manifestacao.setTipo(categoria);
 		
-		crudOuvidoriaService.cadastrar(manifestacao);
-		return "manifestacao/sucessoCriacao";
-	}
+		//crudOuvidoriaService.cadastrar(manifestacao);
+		//return "manifestacao/sucessoCriacao";
+	//}
 	
 	@PostMapping("/delete/{id}")
 	public String deletarManifestacao(@PathVariable("id") int id) {
@@ -61,16 +61,16 @@ public class ManifestacaoController {
 	}
 	
 	
-	@GetMapping("/edit/formulario/{id}")
-	public String showUpdateForm(@PathVariable("id") int id, Model model) {
-	    Manifestacao manifestacao = crudOuvidoriaService.getManifestacoesById(id)
-	      .orElseThrow(() -> new IllegalArgumentException("Manifestcao id invalida:" + id));
+//	@GetMapping("/edit/formulario/{id}")
+//	public String showUpdateForm(@PathVariable("id") int id, Model model) {
+//	    Manifestacao manifestacao = crudOuvidoriaService.getManifestacoesById(id)
+//	      .orElseThrow(() -> new IllegalArgumentException("Manifestcao id invalida:" + id));
 	    
-	    Iterable<Categoria> categorias = crudCategoriaService.getCategorias();
-		model.addAttribute("categorias", categorias);
-	    model.addAttribute("manifestacao", manifestacao);
-	    return "manifestacao/editar";
-	}
+//	    Iterable<Categoria> categorias = crudCategoriaService.getCategorias();
+//		model.addAttribute("categorias", categorias);
+//	    model.addAttribute("manifestacao", manifestacao);
+//	    return "manifestacao/editar";
+//	}
 	
 	@PostMapping("/update/{id}")
 	public String updateManifestacao(@PathVariable("id") long id, @Valid Manifestacao manifestacao, 
