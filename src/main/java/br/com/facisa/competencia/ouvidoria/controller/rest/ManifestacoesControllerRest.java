@@ -44,7 +44,7 @@ public class ManifestacoesControllerRest {
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> detalhar(@PathVariable int id){
 		Optional<Manifestacao> optional = crudOuvidoriaService.getById(id);
-		if(optional.isEmpty()) {
+		if(!optional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Manifestação não encontrada");
 		}
 		
@@ -73,7 +73,7 @@ public class ManifestacoesControllerRest {
 		
 		Optional<Manifestacao> optional = crudOuvidoriaService.getById(id);
 				 
-		if(optional.isEmpty()) {
+		if(!optional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Manifestação não encontrada");
 		}
 		
