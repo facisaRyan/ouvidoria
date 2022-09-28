@@ -20,13 +20,13 @@ public class IndexController {
 	
 	
 	
-	//@GetMapping
-	//public String index(Model model) {
-	//	
-	//	Iterable<Manifestacao> manifestacoes = crudOuvidoriaService.listar();
-	//	model.addAttribute("manifestacoes", manifestacoes);
-	//	return "index";
-	//}
+	@GetMapping
+	public String index(Model model) {
+		
+		Iterable<Manifestacao> manifestacoes = crudOuvidoriaService.getManifestacoes();
+		model.addAttribute("manifestacoes", manifestacoes);
+		return "index";
+	}
 	
 	@GetMapping("/buscar")
 	public String buscarManifestacaoByNome(@RequestParam("tituloManifestacao") String titulo, Model model) {
