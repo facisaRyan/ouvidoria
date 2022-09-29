@@ -72,17 +72,17 @@ public class ManifestacaoController {
 //	    return "manifestacao/editar";
 //	}
 	
-	@PostMapping("/update/{id}")
-	public String updateManifestacao(@PathVariable("id") long id, @Valid Manifestacao manifestacao, 
-	  BindingResult result, Model model) {
-	    if (result.hasErrors()) {
-	    	Iterable<Categoria> categorias = crudCategoriaService.getCategorias();
-			model.addAttribute("categorias", categorias);
-	        return "manifestacao/editar";
-	    }
+	//@PostMapping("/update/{id}")
+	//public String updateManifestacao(@PathVariable("id") long id, @Valid Manifestacao manifestacao, 
+	//  BindingResult result, Model model) {
+	//    if (result.hasErrors()) {
+	//    	Iterable<Categoria> categorias = crudCategoriaService.getCategorias();
+	//		model.addAttribute("categorias", categorias);
+	 //       return "manifestacao/editar";
+	 //   }
 	        
-	    crudOuvidoriaService.updateManifestacao(manifestacao);
-	    return "redirect:/home";
-	}
+	 //   crudOuvidoriaService.updateManifestacao(manifestacao);
+	 //   return "redirect:/home";
+	//}
 	
 }

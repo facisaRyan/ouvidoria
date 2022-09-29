@@ -12,6 +12,8 @@ public class ManifestacaoDto {
 	private String titulo;
 	private String descricao;
 	private LocalDateTime dataCriacao;
+	private String autor;
+	private String categoria;
 	
 	
 	public ManifestacaoDto(Manifestacao manifestacao) {
@@ -19,20 +21,40 @@ public class ManifestacaoDto {
 		this.titulo = manifestacao.getTitulo();
 		this.descricao = manifestacao.getDescricao();
 		this.dataCriacao = manifestacao.getDataCriacao();
+		this.autor = manifestacao.getAluno().getNome();
+		this.categoria = manifestacao.getTipo().getNome();
 	}
-	public String getTitulo() {
-		return titulo;
-	}
-	
-	public String getDescricao() {
-		return descricao;
-	}
+
+
 	public Integer getId() {
 		return id;
 	}
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
 	public LocalDateTime getDataCriacao() {
 		return dataCriacao;
 	}
+
+
+	public String getAutor() {
+		return autor;
+	}
+
+
+	public String getCategoria() {
+		return categoria;
+	}
+	
 		
 	
 	

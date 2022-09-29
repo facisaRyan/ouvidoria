@@ -26,63 +26,85 @@
 		        </li>
 		        
 		      </ul>
-		      <form class="d-flex" action="#" th:action="@{/home/buscar}" th:method="get">
-		        <input name="tituloManifestacao"  class="form-control me-2" type="search" placeholder="Pesquisar por manifestação" aria-label="Pesquisar">
-		        <button id="submitButton"  class="btn btn-outline-success" type="submit">Pesquisar</button>
-		      </form>
+		      
+		        <input v-model="manifestacao.busca" name="tituloManifestacao"  class="form-control me-2" type="search" placeholder="Pesquisar por manifestação" aria-label="Pesquisar">
+		        <button v-on:click="buscarManifestacoes(manifestacao.busca)" id="submitButton"  class="btn btn-outline-success" type="submit">Pesquisar</button>
+		      
 		    </div>
 		  </div>
 		</nav>
 		
 				
-		<div class="container">
+		<div id="manifestacoes" class="container">
 			
 			<h1>Ouvidoria unifacisa</h1>
 			<h2>Lista de manifestações:</h2>	
 			
-			<div class="card  mb-3" style="width: 40rem;" th:each="manifestacao : ${manifestacoes}">
-				
-				
-				
+			<div class="card  mb-3" style="width: 40rem;" v-for="manifestacao in manifestacoes" >				
 				<div class="card-header">
-					<h5 th:text="${manifestacao.titulo}" class="card-title"></h5>
-					<small th:text="${#temporals.format(manifestacao.dataCriacao, 'dd/MM/yyyy')}" class="text-muted"></small>
+					<h5 class="card-title">{{manifestacao.titulo}}</h5>
+					<small  class="text-muted">{{manifestacao.dataCriacao}}</small>
 				</div>
 				
-				<div class="card-body">
-								
-					<h6 th:text="${manifestacao.tipo.nome}"  class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-					<p class="card-text" th:text="${manifestacao.descricao}"></p>
-					
-					
+				<div class="card-body">								
+					<h6  class="card-subtitle mb-2 text-muted">{{manifestacao.categoria}}</h6>
+					<p class="card-text" >{{manifestacao.descricao}}</p>				
 					<div >
-						 Aluno: <span th:text="${manifestacao.aluno.nome}" > ata </span> 
-					</div>
-					
-					
-					
+						 Aluno: <span > {{manifestacao.autor}} </span> 
+					</div>					
 					<div class="row">
-						<div class="card-footer " >
-						
-							<form action="#" th:action="@{'/manifestacao/delete/{id}'(id=${manifestacao.id})}" th:method="post" >
-							 	<button class="btn btn-danger" type="submit" id="submitButton"> Excluir Manifestação </button>
-							</form>
-							
-						
-							
+						<div class="card-footer " >							
+							<button v-on:click="apagarManifestacao(manifestacao.id)" class="btn btn-danger" type="submit" id="submitButton"> Excluir Manifestação </button>												
 						</div>
-					</div>
-					
-					
-		
-				</div>
-				
-				
-			
+					</div>		
+				</div>			
 			</div>
-		</div>
-		
-		
+		</div>		
 	</body>
+	
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+<script>
+		
+	const listarManifestacoes = {
+			data() {
+				return{
+				    	manifestacoes : []
+		
+				}
+			},
+			methods:{
+				getManifestacoes(){
+					axios.get("http://localhost:8080/manifestacoes").then(response => 
+						this.manifestacoes = response.data
+							
+					)
+				},
+				apagarManifestacao(id){
+					const uri = "http://localhost:8080/manifestacoes/" + id
+					axios.delete(uri).then( document.location.reload(true) )
+				    
+				},
+				buscarManifestacoes(titulo){
+					const uri = "http://localhost:8080/manifestacoes/buscar/" + titulo
+					axios.get(uri).then(response => 
+						console.log(response.data)
+						
+					)
+				}
+			},
+			mounted(){
+				this.getManifestacoes();
+			}
+			
+		}
+	
+			
+		
+	const myapp = Vue.createApp(listarManifestacoes).mount('#manifestacoes')		
+	
+	
+</script>
 
 </html>

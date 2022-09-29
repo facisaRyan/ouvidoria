@@ -21,10 +21,9 @@ public class IndexController {
 	
 	
 	@GetMapping
-	public String index(Model model) {
+	public String index() {
 		
-		Iterable<Manifestacao> manifestacoes = crudOuvidoriaService.getManifestacoes();
-		model.addAttribute("manifestacoes", manifestacoes);
+		
 		return "index";
 	}
 	

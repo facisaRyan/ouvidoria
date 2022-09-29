@@ -58,8 +58,18 @@ public class  CrudManifestacaoService {
 		return manifestacaoRepository.findById(id);
 	}
 	
-	public void updateManifestacao(Manifestacao manifestacao) {
+	public ManifestacaoDto updateManifestacao(Manifestacao manifestacao, ManifestacaoForm manifestacaoForm) {
+		
+		Optional<Categoria> optionalCategoria = categoriaRepository.findById(manifestacaoForm.getCategoriaId());
+		Categoria categoria = optionalCategoria.get();
+		
+		manifestacao.setTitulo(manifestacaoForm.getTitulo());
+		manifestacao.setDescricao(manifestacaoForm.getDescricao());
+		manifestacao.setTipo(categoria);
+		
 		manifestacaoRepository.save(manifestacao);
+		
+		return new ManifestacaoDto(manifestacao);
 	}
 	
 }
