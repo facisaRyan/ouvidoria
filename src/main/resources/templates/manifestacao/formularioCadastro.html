@@ -13,7 +13,7 @@
 		
 		<div class="container">	
 			<h1>Cadastrar nova manifestação</h1>
-			<form th:object="${manifestacaoDto}"  method="post" action="/manifestacao/nova">
+			<form th:object="${manifestacaoDto}"  th:method="post" th:action="@{/manifestacao/nova}">
 				
 				<div>
 					<label class="form-label" for="tituloManifestacao">Titulo da manifestação:</label>
@@ -24,11 +24,11 @@
 				</div>
 				
 				<div>
-					<label class="form-label" for="categoriaId" >Categoria da manifestação:</label>
-					<select class="form-select" id="categoriaId" name="categoriaId">
-						<div th:each="categoria : ${categorias}">
-							<option th:field="*{categoriaId}"  th:value="${categoria.id}" th:text="${categoria.nome}"></option>
-						</div>
+					<label class="form-label" >Categoria da manifestação:</label>
+					<select class="form-select" name="categoria">					
+							<option th:field="*{categoria}"  value="ELOGIO" >Elogio</option>
+							<option th:field="*{categoria}"  value="RECLAMAÇÃO" >Reclamação</option>
+							<option th:field="*{categoria}"  value="SUGESTÃO">Sugestão</option>
 					</select>
 				</div>
 				
@@ -45,7 +45,10 @@
 			
 			</form>
 			
-			<a class="btn btn-secondary" href="http://www.localhost:8080/home/"> Voltar </a>
+			
+			<form action="#" th:action="@{/home}" th:method="get" >
+					<button class="btn btn-secondary" type="submit" id="submitButton"> Voltar </button>
+			</form>
 		</div>
 		
 		

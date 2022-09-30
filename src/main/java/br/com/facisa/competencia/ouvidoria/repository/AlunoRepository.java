@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import br.com.facisa.competencia.ouvidoria.modelo.Aluno;
 
 @Repository
-public interface AlunoRepository extends  PagingAndSortingRepository <Aluno, Integer> {
-
+public interface AlunoRepository extends  PagingAndSortingRepository <Aluno, String> {
+	
+	Aluno findByUsername(String userName);
+	Aluno findByEmail (String email);
 }

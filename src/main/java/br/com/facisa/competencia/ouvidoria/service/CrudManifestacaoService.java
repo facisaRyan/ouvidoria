@@ -25,13 +25,7 @@ public class  CrudManifestacaoService {
 	}
 
 	public void cadastrar(Manifestacao manifestacao) {
-		
-		Aluno aluno = new Aluno();
-		aluno.setIdade(17);
-		aluno.setMatricula("A2188D2");
-		aluno.setNome("josnei");
-		
-		alunooRepository.save(aluno);
+		Aluno aluno = alunooRepository.findByUsername("joca");
 				
 		manifestacao.setAluno(aluno);
 				

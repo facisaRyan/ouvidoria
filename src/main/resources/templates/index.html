@@ -22,13 +22,18 @@
 		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 		       
 		        <li class="nav-item">
-		          <a class="nav-link" href="http://www.localhost:8080/manifestacao/formulario">Cadastrar nova manifestacao</a>
+		          <form class="d-flex" action="#" th:action="@{/manifestacao/formulario}" th:method="get">
+			        <button id="submitButton"  class="btn btn-outline-primary" type="submit">Cadastrar nova manifestacao</button>
+			      </form>
 		        </li>
 		        
 		      </ul>
 		      <form class="d-flex" action="#" th:action="@{/home/buscar}" th:method="get">
 		        <input name="tituloManifestacao"  class="form-control me-2" type="search" placeholder="Pesquisar por manifestação" aria-label="Pesquisar">
 		        <button id="submitButton"  class="btn btn-outline-success" type="submit">Pesquisar</button>
+		      </form>
+		       <form class="d-flex" action="#" th:action="@{/logout}" th:method="post">
+		        <button id="submitButton"  class="btn btn-outline-darger" type="submit">Sair</button>
 		      </form>
 		    </div>
 		  </div>
@@ -51,12 +56,12 @@
 				
 				<div class="card-body">
 								
-					<h6 th:text="${manifestacao.tipo.nome}"  class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+					<h6 th:text="${manifestacao.tipo}"  class="card-subtitle mb-2 text-muted">Card subtitle</h6>
 					<p class="card-text" th:text="${manifestacao.descricao}"></p>
 					
 					
 					<div >
-						 Aluno: <span th:text="${manifestacao.aluno.nome}" > ata </span> 
+						 Aluno: <span th:text="${manifestacao.aluno.username}" > ata </span> 
 					</div>
 					
 					

@@ -4,13 +4,14 @@ package br.com.facisa.competencia.ouvidoria.manifestacao.dto;
 
 import javax.validation.constraints.NotBlank;
 
+import br.com.facisa.competencia.ouvidoria.modelo.Categoria;
 import br.com.facisa.competencia.ouvidoria.modelo.Manifestacao;
 
 public class ManifestacaoDto {
 	
 	@NotBlank
 	private String tituloManifestacao;
-	private int categoriaId;
+	private Categoria categoria;
 	@NotBlank
 	private String descricaoManifestacao;
 	
@@ -29,16 +30,19 @@ public class ManifestacaoDto {
 	}
 	
 	
-	public int getCategoriaId() {
-		return categoriaId;
+	
+	public Categoria getCategoria() {
+		return categoria;
 	}
-	public void setCategoriaId(int categoriaId) {
-		this.categoriaId = categoriaId;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
+	
 	public Manifestacao toManifestacao() {
 		Manifestacao manifestacao = new Manifestacao();
 		manifestacao.setTitulo(tituloManifestacao);
 		manifestacao.setDescricao(descricaoManifestacao);
+		manifestacao.setTipo(categoria);
 		return manifestacao;
 	}
 	

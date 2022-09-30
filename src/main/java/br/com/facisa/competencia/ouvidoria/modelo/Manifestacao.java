@@ -3,6 +3,9 @@ package br.com.facisa.competencia.ouvidoria.modelo;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,14 +22,10 @@ public class Manifestacao {
 	private String titulo;
 	private String descricao;
 	private LocalDate dataCriacao = LocalDate.now();
-	@ManyToOne
+	@Enumerated(EnumType.STRING)
 	private Categoria tipo;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Aluno aluno;
-	
-	public Manifestacao() {
-		
-	}
 	
 	public Integer getId() {
 		return id;
@@ -46,6 +45,12 @@ public class Manifestacao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
+	}
+	public void setDataCriacao(LocalDate dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
 	public Categoria getTipo() {
 		return tipo;
 	}
@@ -58,18 +63,8 @@ public class Manifestacao {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-
-	public LocalDate getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(LocalDate dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
 	
-	public int getCategoriaId() {
-		return this.tipo.getId();
-	}
+	
 	
 	
 }

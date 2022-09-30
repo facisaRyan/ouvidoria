@@ -1,48 +1,80 @@
 package br.com.facisa.competencia.ouvidoria.modelo;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "alunos")
+@Table(name = "users")
 public class Aluno {
 	
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String nome;
+	private String username;
+	private String password;
+	private String email;
+	private Boolean enabled;
 	private String matricula;
-	private Integer idade;
 	
-	public Aluno() {}
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno", fetch = FetchType.LAZY )	
+	private List<Manifestacao> manifestacoes;
 	
-	public Integer getId() {
-		return id;
+	
+
+	public String getUsername() {
+		return username;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getNome() {
-		return nome;
+
+	public String getPassword() {
+		return password;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public String getMatricula() {
 		return matricula;
 	}
+
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
-	public Integer getIdade() {
-		return idade;
+
+	public List<Manifestacao> getManifestacoes() {
+		return manifestacoes;
 	}
-	public void setIdade(Integer idade) {
-		this.idade = idade;
+
+	public void setManifestacoes(List<Manifestacao> manifestacoes) {
+		this.manifestacoes = manifestacoes;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
 	
 	
 	
