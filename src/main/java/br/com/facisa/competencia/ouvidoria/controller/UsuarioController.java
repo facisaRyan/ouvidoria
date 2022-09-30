@@ -15,6 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.facisa.competencia.ouvidoria.manifestacao.dto.CadastroDto;
+import br.com.facisa.competencia.ouvidoria.modelo.Aluno;
 import br.com.facisa.competencia.ouvidoria.service.CadastroService;
 
 @Controller
@@ -43,7 +44,8 @@ public class UsuarioController {
 	  Errors errors) {
 	    
 	    try {
-	        cadastroService.registerNewUserAccount(cadastroDto);
+	        Aluno aluno = cadastroService.registerNewUserAccount(cadastroDto);
+	        cadastroService.setRoles(aluno.getEmail());
 	    } catch (Exception uaeEx) {
 	    	ModelAndView mav = new ModelAndView();
 	    	mav.addObject("message", "An account for that username/email already exists.");

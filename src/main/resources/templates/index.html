@@ -73,6 +73,10 @@
 							 	<button class="btn btn-danger" type="submit" id="submitButton"> Excluir Manifestação </button>
 							</form>
 							
+							<form action="#" th:action="@{'/manifestacao/update/{id}'(id=${manifestacao.id})}" th:method="get" >
+							 	<button class="btn btn-warning" type="submit" id="submitButton"> Editar Manifestação </button>
+							</form>
+							
 						
 							
 						</div>

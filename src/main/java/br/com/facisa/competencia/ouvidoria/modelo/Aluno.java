@@ -24,7 +24,8 @@ public class Aluno {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno", fetch = FetchType.LAZY )	
 	private List<Manifestacao> manifestacoes;
 	
-	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "papelId.username", fetch = FetchType.LAZY )	
+	private List<Papel> papeis;
 
 	public String getUsername() {
 		return username;
@@ -74,6 +75,15 @@ public class Aluno {
 		this.email = email;
 	}
 
+	public List<Papel> getPapeis() {
+		return papeis;
+	}
+
+	public void setPapeis(List<Papel> papeis) {
+		this.papeis = papeis;
+	}
+	
+	
 	
 	
 	
