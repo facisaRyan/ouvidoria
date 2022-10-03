@@ -9,13 +9,21 @@ import br.com.facisa.competencia.ouvidoria.modelo.Manifestacao;
 
 public class ManifestacaoDto {
 	
+	private int id;
 	@NotBlank
 	private String tituloManifestacao;
 	private Categoria categoria;
 	@NotBlank
 	private String descricaoManifestacao;
 	
+	public ManifestacaoDto () {}
 	
+	public ManifestacaoDto(Manifestacao manifestacao) {
+		this.id = manifestacao.getId();
+		this.tituloManifestacao = manifestacao.getTitulo();
+		this.categoria = manifestacao.getTipo();
+		this.descricaoManifestacao = manifestacao.getDescricao();
+	}
 	public String getTituloManifestacao() {
 		return tituloManifestacao;
 	}
@@ -44,6 +52,12 @@ public class ManifestacaoDto {
 		manifestacao.setDescricao(descricaoManifestacao);
 		manifestacao.setTipo(categoria);
 		return manifestacao;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

@@ -16,18 +16,14 @@ public class  CrudManifestacaoService {
 	@Autowired
 	private ManifestacaoRepository manifestacaoRepository;
 	@Autowired
-	private AlunoRepository alunooRepository;
-	
-
+	private AlunoRepository alunoRepository;	
 	
 	public Iterable<Manifestacao> listar() {
 		return manifestacaoRepository.findAll();		
 	}
 
 	public void cadastrar(Manifestacao manifestacao) {
-		Aluno aluno = alunooRepository.findByUsername("joca");
-				
-		manifestacao.setAluno(aluno);
+
 				
 		manifestacaoRepository.save(manifestacao);
 	}
@@ -37,8 +33,8 @@ public class  CrudManifestacaoService {
 		
 	}
 
-	public Iterable<Manifestacao> getManifestacoesByNome(String titulo) {
-		return manifestacaoRepository.findByTituloIgnoreCaseStartingWith(titulo);
+	public Iterable<Manifestacao> getManifestacoesByNomeAndAluno(String titulo, String email) {
+		return manifestacaoRepository.findByTituloStartingWithAndAluno_EmailIgnoreCaseStartingWith(titulo, email);
 	}
 	
 	public Optional<Manifestacao> getManifestacoesById(int id) {
@@ -47,6 +43,12 @@ public class  CrudManifestacaoService {
 	
 	public void updateManifestacao(Manifestacao manifestacao) {
 		manifestacaoRepository.save(manifestacao);
+	}
+
+	public Iterable<Manifestacao> listarByUsuario(String userName) {
+		Aluno user = alunoRepository.findByUsername(userName);
+		String email = user.getEmail();
+		return manifestacaoRepository.findByAluno_Email(email);
 	}
 	
 }

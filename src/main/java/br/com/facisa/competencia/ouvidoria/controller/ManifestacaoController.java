@@ -1,8 +1,11 @@
 package br.com.facisa.competencia.ouvidoria.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.facisa.competencia.ouvidoria.manifestacao.dto.ManifestacaoDto;
+import br.com.facisa.competencia.ouvidoria.modelo.Aluno;
 import br.com.facisa.competencia.ouvidoria.modelo.Manifestacao;
+import br.com.facisa.competencia.ouvidoria.repository.AlunoRepository;
 import br.com.facisa.competencia.ouvidoria.service.CrudManifestacaoService;
 
 @Controller
@@ -21,6 +26,8 @@ public class ManifestacaoController {
 	
 	@Autowired
 	private  CrudManifestacaoService crudOuvidoriaService;
+	@Autowired
+	private AlunoRepository alunoRepository;
 	
 	
 
@@ -40,6 +47,9 @@ public class ManifestacaoController {
 		}
 				
 		Manifestacao manifestacao = manifestacaoDto.toManifestacao();
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		Aluno user = alunoRepository.findByUsername(userName);
+		manifestacao.setAluno(user);
 				
 		crudOuvidoriaService.cadastrar(manifestacao);
 		return "redirect:/home";
@@ -57,19 +67,24 @@ public class ManifestacaoController {
 	    Manifestacao manifestacao = crudOuvidoriaService.getManifestacoesById(id)
 	      .orElseThrow(() -> new IllegalArgumentException("Manifestcao id invalida:" + id));
 	    
-	   
-	    model.addAttribute("manifestacao", manifestacao);
+	    ManifestacaoDto manifestacaoDto = new ManifestacaoDto(manifestacao);
+	    model.addAttribute("manifestacaoDto",  manifestacaoDto);
 	    return "manifestacao/editar";
 	}
 	
-	@PostMapping("/update/{id}")
-	public String updateManifestacao(@PathVariable("id") long id, @Valid Manifestacao manifestacao, 
-	  BindingResult result, Model model) {
-	    if (result.hasErrors()) {
+	@PostMapping("/update")
+	public String updateManifestacao (@Valid ManifestacaoDto manifestacaoDto, BindingResult bindingResult, Model model) {
+		
+	    if (bindingResult.hasErrors()) {
 	    	
 	        return "manifestacao/editar";
 	    }
-	        
+	    
+	    Optional<Manifestacao> optional = crudOuvidoriaService.getManifestacoesById(manifestacaoDto.getId()); 
+	    Manifestacao manifestacao = optional.get();
+	    manifestacao.setTitulo(manifestacaoDto.getTituloManifestacao());
+	    manifestacao.setDescricao(manifestacaoDto.getDescricaoManifestacao());
+	    manifestacao.setTipo(manifestacaoDto.getCategoria());
 	    crudOuvidoriaService.updateManifestacao(manifestacao);
 	    return "redirect:/home";
 	}

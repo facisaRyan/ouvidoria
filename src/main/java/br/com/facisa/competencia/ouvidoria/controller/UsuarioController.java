@@ -1,12 +1,11 @@
 package br.com.facisa.competencia.ouvidoria.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +39,12 @@ public class UsuarioController {
 	@PostMapping("/usuario/cadastro")
 	public String registerUserAccount(
 	  @ModelAttribute("user") @Valid CadastroDto cadastroDto,
-	  HttpServletRequest request,
-	  Errors errors) {
+	  BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+					
+			return "autenticacao/cadastro";
+		}
 	    
 	    try {
 	        Aluno aluno = cadastroService.registerNewUserAccount(cadastroDto);

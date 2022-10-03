@@ -10,4 +10,8 @@ public interface ManifestacaoRepository extends  PagingAndSortingRepository <Man
 
 	Iterable<Manifestacao> findByTituloIgnoreCaseStartingWith(String titulo);
 
+	Iterable<Manifestacao> findByAluno_Email(String email);
+
+	Iterable<Manifestacao> findByTituloStartingWithAndAluno_EmailIgnoreCaseStartingWith(String titulo, String email);
+
 }

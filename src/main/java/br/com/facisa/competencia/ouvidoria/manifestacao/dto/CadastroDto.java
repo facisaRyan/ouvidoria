@@ -25,6 +25,7 @@ public class CadastroDto {
     
     @NotNull
     @NotEmpty
+    @ValidarEmail
     private String email;
 
 	public String getUsername() {

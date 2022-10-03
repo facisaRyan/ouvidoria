@@ -14,7 +14,9 @@
 		
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <div class="container-fluid">
-		   <a class="navbar-brand" href="http://www.localhost:8080/home">Home</a>
+		   <form action="#" th:action="@{/home}" th:method="get" >
+					<button class="btn btn-secondary" type="submit" id="submitButton"> Home </button>
+				</form>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>
 		    </button>
@@ -25,9 +27,9 @@
 		          <form class="d-flex" action="#" th:action="@{/manifestacao/formulario}" th:method="get">
 			        <button id="submitButton"  class="btn btn-outline-primary" type="submit">Cadastrar nova manifestacao</button>
 			      </form>
-		        </li>
-		        
+		        </li>		        
 		      </ul>
+		      
 		      <form class="d-flex" action="#" th:action="@{/home/buscar}" th:method="get">
 		        <input name="tituloManifestacao"  class="form-control me-2" type="search" placeholder="Pesquisar por manifestação" aria-label="Pesquisar">
 		        <button id="submitButton"  class="btn btn-outline-success" type="submit">Pesquisar</button>
@@ -41,12 +43,30 @@
 		
 				
 		<div class="container">
+		
+					
 			
-			<h1>Ouvidoria unifacisa</h1>
-			<h2>Lista de manifestações:</h2>	
+			<div class="card border-primary mb-3" style="max-width: 30rem;">
+			  <div class="card-header"><img alt="" src="https://www.unifacisa.edu.br/assets/imgs/logo.svg">	</div>
+			  <div class="card-body text-primary">
+			    <h5 class="card-title">Ouvidoria UniFacisa</h5>
+			    <p class="card-text mb-0">Aluno:</p>
+			  	<small th:text="${usuario.nome}" class="text-muted"></small>
+			  	<p class="card-text mb-0">RA:</p>
+			  	<small th:text="${usuario.matricula}" class="text-muted"></small>
+			  </div>
+			</div>	
+			<h2>Lista de manifestações:</h2>
+			<div th:if="${isEmpty}" >
+					dasdasdas
+			</div>
+			<div th:if="${manifestacoes == null or manifestacoes.empty}"> Nenhuma Manifestação cadastrada</div>
 			
 			<div class="card  mb-3" style="width: 40rem;" th:each="manifestacao : ${manifestacoes}">
 				
+				
+				
+
 				
 				
 				<div class="card-header">
@@ -73,7 +93,7 @@
 							 	<button class="btn btn-danger" type="submit" id="submitButton"> Excluir Manifestação </button>
 							</form>
 							
-							<form action="#" th:action="@{'/manifestacao/update/{id}'(id=${manifestacao.id})}" th:method="get" >
+							<form action="#" th:action="@{'/manifestacao/edit/formulario/{id}'(id=${manifestacao.id})}" th:method="get" >
 							 	<button class="btn btn-warning" type="submit" id="submitButton"> Editar Manifestação </button>
 							</form>
 							

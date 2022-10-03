@@ -9,29 +9,31 @@
 		<div class="container">	
 			<h1>Editar manifestação</h1>	
 		
-			<form action="#" th:action="@{'/manifestacao/update/{id}'(id=${manifestacao.id})}"  th:object="${manifestacao}"  method="post">
+			<form action="#"  th:action="@{/manifestacao/update}" th:object="${manifestacaoDto}"  method="post">
 					
 					<div>
-						<label class="form-label" for="titulo">Titulo da manifestação:</label>
-						<input th:text="${manifestacao.titulo}" class="form-control" th:field="*{titulo}" th:errorClass="is-invalid" placeholder="Titulo da manifestação"/>
-						<div class="alert alert-danger mt-3" th:errors="*{titulo}">
+						<input type="hidden" th:field="*{id}" >
+						<label class="form-label" for="tituloManifestacao">Titulo da manifestação:</label>
+						<input class="form-control" th:field="*{tituloManifestacao}" th:errorClass="is-invalid" placeholder="Titulo da manifestação"/>
+						<div class="alert alert-danger mt-3" th:errors="*{tituloManifestacao}">
 									Erros do campo produto
 						</div>
+						
 					</div>
 					
 					<div>
-						<label class="form-label" for="categoriaId" >Categoria da manifestação:</label>
-						<select class="form-select" id="categoriaId" name="categoriaId">
-							<div th:each="categoria : ${categorias}">
-								<option th:field="*{categoriaId}"  th:value="${categoria.id}" th:text="${categoria.nome}"></option>
-							</div>
+						<label class="form-label" for="categoria" >Categoria da manifestação:</label>
+						<select class="form-select" name="categoria">					
+							<option th:field="*{categoria}"  value="ELOGIO" >Elogio</option>
+							<option th:field="*{categoria}"  value="RECLAMAÇÃO" >Reclamação</option>
+							<option th:field="*{categoria}"  value="SUGESTÃO">Sugestão</option>
 						</select>
 					</div>
 					
 					<div>
 						<label class="form-label" for="descricao" >Descrição da manifestação:</label>
-						<textarea th:text="${manifestacao.descricao}" class="form-control" th:field="*{descricao}" th:errorClass="is-invalid" placeholder="Informe o que deseja manifestar"></textarea>		
-						<div class="alert alert-danger mt-3" th:errors="*{descricao}">
+						<textarea th:text="${manifestacaoDto.descricaoManifestacao}" class="form-control" th:field="*{descricaoManifestacao}" th:errorClass="is-invalid" placeholder="Informe o que deseja manifestar"></textarea>		
+						<div class="alert alert-danger mt-3" th:errors="*{descricaoManifestacao}">
 									Erros do campo produto
 						</div>
 					</div>
@@ -39,9 +41,11 @@
 					<button class="btn btn-primary mt-2" type="submit">Editar manifestacao</button>
 					
 				
-				</form>
+			</form>
 				
-				<a class="btn btn-danger mt-2" href="http://www.localhost:8080/home">Voltar</a>
+				<form action="#" th:action="@{/home}" th:method="get" >
+					<button class="btn btn-secondary" type="submit" id="submitButton"> Voltar </button>
+				</form>
 		</div>
 	</body>
 	

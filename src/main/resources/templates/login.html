@@ -14,9 +14,12 @@
 	
 		<div class="container">	
 						
+			<img alt="" src="https://www.unifacisa.edu.br/assets/imgs/logo.svg">
+				<h1>Ouvidoria unifacisa</h1>
+				<h2>Login</h2>
 			
-			
-			<div class="card mb-3" >	
+			<div class="card mb-3" >
+					
 				
 				<form th:action="@{/autenticacao/login}" method="post" class="card-body">
 					<div class="form-group">
@@ -29,10 +32,10 @@
 						<input type="password" name="password" class="form-control" placeholder="senha">
 					</div>
 					
-					<button class="btn btn-primary" type="submit"> Autenticar</button>
+					<button class="btn btn-primary mt-2" type="submit"> Autenticar</button>
 				</form>
 				
-				<form class="d-flex" action="#" th:action="@{/autenticacao/cadastro}" th:method="get">
+				<form class="d-flex " action="#" th:action="@{/autenticacao/cadastro}" th:method="get">
 			        <button id="submitButton"  class="btn btn-outline-primary" type="submit">Cadastre-se</button>
 			      </form>
 			</div>
