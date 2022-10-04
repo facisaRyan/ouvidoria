@@ -15,19 +15,15 @@ Passo a passo para testes:
 -> Quando a aplicação terminar de ser iniciar no terminal abrir no navegor e pesquisar o endereço "http://www.localhost:8080/home/"
 --------------------------------------------------------------------------------------
 
-Adições:
+Adições versão 1.3:
 	
-	-> Integração com banco na nuvem utilizando heroky
-	-> Validação de campos
-	-> Deletar manifestação
-	-> Layout/style utilizando bootstrap
-	-> Busca de manifestações pelo titulo
-	-> Formatação campo de data
-	-> Busca automatica por categorias no banco de dados
-	-> Cache de buscas
----------------------------------------------------------------------------------------
-
-Adições futuras:
-
 	-> Gerenciamento de usuarios com Spring-secutiry
 	-> Feature de editar manifestação
+---------------------------------------------------------------------------------------
+
+Observação:
+	
+	-> A aplicação estava utilizando uma base de dados na nuvem, porem a plataforma utilizada(heroku) está sofrendo reformulações
+	e graças a isso as credenciais do banco mudam constantemente, quebrando o código, por esse motivo optei por utilizar o banco em memoria H2.
+
+	
